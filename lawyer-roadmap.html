@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Lawyer Career Roadmap</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #f8fafc, #eef2ff);
+            margin: 0;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 28px;
+            color: #1e293b;
+        }
+
+        /* Main Container */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 120px;
+            padding: 80px 40px 120px;
+            position: relative;
+        }
+
+        /* Level Block */
+        .level {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Main Node Styling */
+        .node {
+            padding: 18px 30px;
+            border-radius: 14px;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            min-width: 230px;
+            text-align: center;
+            transition: 0.3s ease;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .node:hover {
+            transform: translateY(-10px) scale(1.08);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Gradient Colors */
+        .junior {
+            background: linear-gradient(135deg, #f97316, #fb923c);
+        }
+
+        .mid {
+            background: linear-gradient(135deg, #ef4444, #f87171);
+        }
+
+        .senior {
+            background: linear-gradient(135deg, #7f1d1d, #991b1b);
+        }
+
+        /* Connector Line */
+        .branch-line {
+            width: 4px;
+            height: 60px;
+            background: linear-gradient(to bottom, #cbd5e1, #94a3b8);
+            margin: 15px 0;
+        }
+
+        /* Sub Skills */
+        .sub-node {
+            background: white;
+            padding: 12px 18px;
+            border-radius: 10px;
+            margin: 8px 0;
+            width: 230px;
+            text-align: center;
+            transition: 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .sub-node:hover {
+            background: #fee2e2;
+            border-color: #ef4444;
+            transform: translateX(8px) scale(1.05);
+        }
+
+        /* Animation on load */
+        .level {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .level:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .level:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media(max-width: 1000px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+                gap: 80px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Lawyer Career Roadmap</h1>
+
+    <div class="container">
+
+        <!-- Junior -->
+        <div class="level">
+            <div class="node junior">Junior Associate</div>
+            <div class="branch-line"></div>
+            <div class="sub-node">Legal Research</div>
+            <div class="sub-node">Drafting</div>
+            <div class="sub-node">Court Procedures</div>
+            <div class="sub-node">Communication</div>
+        </div>
+
+        <!-- Mid -->
+        <div class="level">
+            <div class="node mid">Associate Lawyer</div>
+            <div class="branch-line"></div>
+            <div class="sub-node">Litigation</div>
+            <div class="sub-node">Client Handling</div>
+            <div class="sub-node">Case Strategy</div>
+            <div class="sub-node">Negotiation</div>
+        </div>
+
+        <!-- Senior -->
+        <div class="level">
+            <div class="node senior">Senior Lawyer</div>
+            <div class="branch-line"></div>
+            <div class="sub-node">Court Representation</div>
+            <div class="sub-node">Complex Cases</div>
+            <div class="sub-node">Legal Advisory</div>
+            <div class="sub-node">Leadership</div>
+        </div>
+
+    </div>
+
+    <script>
+        // Click highlight interaction
+        document.querySelectorAll(".sub-node").forEach(node => {
+            node.addEventListener("click", () => {
+                node.style.background = "#fecaca";
+                node.style.borderColor = "#b91c1c";
+                setTimeout(() => {
+                    node.style.background = "white";
+                    node.style.borderColor = "transparent";
+                }, 800);
+            });
+        });
+    </script>
+
+</body>
+
+</html>

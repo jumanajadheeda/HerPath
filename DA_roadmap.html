@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Data Analyst Roadmap</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #f8fafc, #eef2ff);
+            margin: 0;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 28px;
+            color: #1e293b;
+        }
+
+        /* Main Layout */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 120px;
+            padding: 80px 40px 120px;
+        }
+
+        /* Level Section */
+        .level {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: fadeUp 0.6s ease forwards;
+        }
+
+        .level:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .level:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        /* Main Nodes */
+        .node {
+            padding: 18px 30px;
+            border-radius: 14px;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            min-width: 240px;
+            text-align: center;
+            transition: 0.3s ease;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            cursor: pointer;
+        }
+
+        .node:hover {
+            transform: translateY(-10px) scale(1.08);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Gradients */
+        .junior {
+            background: linear-gradient(135deg, #10b981, #34d399);
+        }
+
+        .mid {
+            background: linear-gradient(135deg, #3b82f6, #60a5fa);
+        }
+
+        .senior {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+        }
+
+        /* Connector Line */
+        .branch-line {
+            width: 4px;
+            height: 60px;
+            background: linear-gradient(to bottom, #cbd5e1, #94a3b8);
+            margin: 15px 0;
+        }
+
+        /* Skill Boxes */
+        .sub-node {
+            background: white;
+            padding: 12px 18px;
+            border-radius: 10px;
+            margin: 8px 0;
+            width: 240px;
+            text-align: center;
+            transition: 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .sub-node:hover {
+            background: #ecfdf5;
+            border-color: #10b981;
+            transform: translateX(8px) scale(1.05);
+        }
+
+        /* Entry Animation */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media(max-width:1000px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+                gap: 80px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Data Analyst Career Roadmap</h1>
+
+    <div class="container">
+
+        <!-- Junior -->
+        <div class="level">
+            <div class="node junior">Junior Data Analyst</div>
+            <div class="branch-line"></div>
+            <div class="sub-node">Excel</div>
+            <div class="sub-node">SQL</div>
+            <div class="sub-node">Python</div>
+            <div class="sub-node">Data Visualization</div>
+        </div>
+
+        <!-- Mid -->
+        <div class="level">
+            <div class="node mid">Data Analyst</div>
+            <div class="branch-line"></div>
+            <div class="sub-node">Advanced SQL</div>
+            <div class="sub-node">Statistics</div>
+            <div class="sub-node">Power BI / Tableau</div>
+        </div>
+
+        <!-- Senior -->
+        <div class="level">
+            <div class="node senior">Senior Data Analyst</div>
+            <div class="branch-line"></div>
+            <div class="sub-node">Machine Learning Basics</div>
+            <div class="sub-node">Business Strategy</div>
+            <div class="sub-node">Analytics Leadership</div>
+        </div>
+
+    </div>
+
+    <script>
+        // Interactive click highlight
+        document.querySelectorAll(".sub-node").forEach(node => {
+            node.addEventListener("click", () => {
+                node.style.background = "#bbf7d0";
+                node.style.borderColor = "#059669";
+                setTimeout(() => {
+                    node.style.background = "white";
+                    node.style.borderColor = "transparent";
+                }, 800);
+            });
+        });
+    </script>
+
+</body>
+
+</html>

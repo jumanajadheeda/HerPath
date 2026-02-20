@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Frontend Developer Roadmap</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: #f4f6fa;
+            overflow-x: auto;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 20px;
+            color: #2c3e50;
+        }
+
+        .roadmap-container {
+            position: relative;
+            width: 2000px;
+            padding: 100px 100px;
+        }
+
+        .main-path {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Main Horizontal Line */
+        .main-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: #cbd5e1;
+            z-index: 0;
+        }
+
+        /* Main Nodes */
+        .node {
+            position: relative;
+            padding: 15px 25px;
+            border-radius: 10px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            z-index: 1;
+            text-align: center;
+            min-width: 200px;
+        }
+
+        /* Color Sections */
+        .html {
+            background: #e34f26;
+        }
+
+        .css {
+            background: #264de4;
+        }
+
+        .js {
+            background: #f7df1e;
+            color: black;
+        }
+
+        .project {
+            background: #10b981;
+        }
+
+        .performance {
+            background: #8b5cf6;
+        }
+
+        .deployment {
+            background: #111827;
+        }
+
+        .node:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Branch Container */
+        .branch {
+            position: absolute;
+            top: 120px;
+            width: 200px;
+        }
+
+        .branch-line {
+            width: 4px;
+            height: 60px;
+            background: #cbd5e1;
+            margin: 0 auto;
+        }
+
+        .subtopics {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .sub-node {
+            background: white;
+            border: 2px solid #d1d5db;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .sub-node:hover {
+            background: #e0f2fe;
+            transform: scale(1.05);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .roadmap-container {
+                transform: scale(0.8);
+                transform-origin: top left;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Frontend Developer Visual Roadmap</h1>
+
+    <div class="roadmap-container">
+
+        <div class="main-line"></div>
+
+        <div class="main-path">
+
+            <div class="node html" id="html">HTML</div>
+            <div class="node css" id="css">CSS</div>
+            <div class="node js" id="js">JavaScript</div>
+            <div class="node project">Static Project</div>
+            <div class="node project">Interactive App</div>
+            <div class="node performance">Performance</div>
+            <div class="node deployment">Deployment</div>
+
+        </div>
+
+        <!-- HTML Branch -->
+        <div class="branch" style="left:50px;">
+            <div class="branch-line"></div>
+            <div class="subtopics">
+                <div class="sub-node">HTML Basics</div>
+                <div class="sub-node">Forms</div>
+                <div class="sub-node">Semantic Tags</div>
+                <div class="sub-node">Accessibility</div>
+            </div>
+        </div>
+
+        <!-- CSS Branch -->
+        <div class="branch" style="left:330px;">
+            <div class="branch-line"></div>
+            <div class="subtopics">
+                <div class="sub-node">CSS Basics</div>
+                <div class="sub-node">Flexbox</div>
+                <div class="sub-node">Grid</div>
+                <div class="sub-node">Responsive Design</div>
+                <div class="sub-node">Animations</div>
+            </div>
+        </div>
+
+        <!-- JS Branch -->
+        <div class="branch" style="left:610px;">
+            <div class="branch-line"></div>
+            <div class="subtopics">
+                <div class="sub-node">JavaScript Basics</div>
+                <div class="sub-node">ES6</div>
+                <div class="sub-node">DOM</div>
+                <div class="sub-node">Events</div>
+                <div class="sub-node">Async/Await</div>
+                <div class="sub-node">Fetch API</div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Hover interaction enhancement
+        document.querySelectorAll(".sub-node").forEach(node => {
+            node.addEventListener("click", () => {
+                alert("Learn: " + node.innerText);
+            });
+        });
+    </script>
+
+</body>
+
+</html>

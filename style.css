@@ -77,13 +77,17 @@ button:hover {
     margin-top: 10px;
 }
 
-.progress-bar-fill {
+/* .progress-bar-fill {
     height: 100%;
     background-color: #6a0dad;
     transition: width 0.5s ease-in-out;
+} */
+
+.progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #6a0dad, #9b59b6);
+    transition: width 0.8s ease-in-out;
 }
-
-
 
 .level-list-card {
     transition: all 0.3s ease;
@@ -99,4 +103,97 @@ button:hover {
 .level-list-card:hover h3,
 .level-list-card:hover p {
     color: white;
+}
+
+/* ===== Fade In Animation ===== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animated-result {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+/* ===== Badge Pop Animation ===== */
+@keyframes popIn {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.status-badge {
+    animation: popIn 0.4s ease;
+}
+
+.roadmap-container {
+    position: relative;
+    margin: 50px 0;
+    padding-left: 50px;
+}
+
+.roadmap-line {
+    position: absolute;
+    left: 20px;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(to bottom, #7b2ff7, #b388ff);
+}
+
+.roadmap-stage {
+    background: white;
+    border: 2px solid #7b2ff7;
+    padding: 15px 20px;
+    margin-bottom: 40px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: 600;
+}
+
+.roadmap-stage:hover {
+    background: #f3e8ff;
+    transform: translateX(10px);
+}
+
+.roadmap-container::before {
+    content: "";
+    position: absolute;
+    left: 15px;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    background: #6a0dad;
+}
+
+.stage-details {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 20px;
+    box-shadow: 0 5px 15px rgba(123, 47, 247, 0.2);
+}
+
+.download-btn {
+    margin-top: 20px;
+    padding: 12px 25px;
+    background: #7b2ff7;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
 }
