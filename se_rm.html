@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Software Engineer Roadmap</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #eef2ff, #f8fafc);
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 30px 20px;
+            color: #1e293b;
+            font-size: 28px;
+        }
+
+        /* Container */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 120px;
+            padding: 60px 40px 120px;
+            position: relative;
+        }
+
+        /* Vertical Connector Line 
+        .container::before {
+            content: "";
+            position: absolute;
+            top: 120px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 65%;
+            background: linear-gradient(to bottom, #0ea5e9, #8b5cf6);
+            z-index: 0;
+        }*/
+
+        /* Level Block */
+        .level {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Main Node */
+        .node {
+            padding: 18px 30px;
+            border-radius: 12px;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s ease;
+            min-width: 220px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            z-index: 2;
+        }
+
+        .node:hover {
+            transform: translateY(-10px) scale(1.08);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Colors */
+        .intern {
+            background: linear-gradient(135deg, #0ea5e9, #38bdf8);
+        }
+
+        .junior {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+        }
+
+        .senior {
+            background: linear-gradient(135deg, #7c3aed, #a855f7);
+        }
+
+        /* Branch Line */
+        .branch-line {
+            width: 4px;
+            height: 50px;
+            background: #cbd5e1;
+            margin: 10px 0;
+        }
+
+        /* Skills */
+        .sub-node {
+            background: white;
+            border-radius: 10px;
+            padding: 12px 15px;
+            margin: 8px 0;
+            width: 220px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .sub-node:hover {
+            background: #f1f5ff;
+            border-color: #6366f1;
+            transform: translateX(8px) scale(1.05);
+        }
+
+        /* Responsive */
+        @media(max-width: 1000px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+                gap: 80px;
+            }
+
+            .container::before {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Software Engineer Career Roadmap</h1>
+
+    <div class="container">
+
+        <!-- Intern -->
+        <div class="level">
+            <div class="node intern">Intern</div>
+            <div class="branch-line"></div>
+            <div class="sub-node">HTML</div>
+            <div class="sub-node">CSS</div>
+            <div class="sub-node">JavaScript Basics</div>
+            <div class="sub-node">Git</div>
+            <div class="sub-node">DSA Basics</div>
+        </div>
+
+        <!-- Junior -->
+        <div class="level">
+            <div class="node junior">Junior Developer</div>
+            <div class="branch-line"></div>
+            <div class="sub-node">React / Backend Framework</div>
+            <div class="sub-node">APIs</div>
+            <div class="sub-node">Databases</div>
+            <div class="sub-node">DSA Advanced</div>
+        </div>
+
+        <!-- Senior -->
+        <div class="level">
+            <div class="node senior">Senior Developer</div>
+            <div class="branch-line"></div>
+            <div class="sub-node">System Design</div>
+            <div class="sub-node">Cloud</div>
+            <div class="sub-node">Scalability</div>
+            <div class="sub-node">Code Reviews</div>
+            <div class="sub-node">Mentoring</div>
+        </div>
+
+    </div>
+
+    <script>
+        // Add interactive click animation
+        document.querySelectorAll(".sub-node").forEach(node => {
+            node.addEventListener("click", () => {
+                node.style.background = "#dbeafe";
+                node.style.borderColor = "#3b82f6";
+                setTimeout(() => {
+                    node.style.background = "white";
+                    node.style.borderColor = "transparent";
+                }, 800);
+            });
+        });
+    </script>
+
+</body>
+
+</html>

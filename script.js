@@ -2,30 +2,25 @@
 // const careers = {
 //     "Software Engineer": {
 //         "levels": [
-//             {
-//                 "title": "Intern",
-//                 "salary": 150000,
-//                 "years": "0-1 Years",
-//                 "skills": ["HTML", "CSS", "JavaScript Basics", "Git", "DSA Basics"]
-//             },
-//             {
-//                 "title": "Junior Developer / SDE I",
-//                 "salary": 800000,
-//                 "years": "1-3 Years",
-//                 "skills": ["JavaScript", "React or Backend Framework", "APIs", "Databases", "DSA"]
-//             },
-//             {
-//                 "title": "Senior Developer / SDE II",
-//                 "salary": 1800000,
-//                 "years": "4-7 Years",
-//                 "skills": ["System Design", "Databases", "Scalability", "Cloud", "Testing", "Code Reviews"]
-//             },
-//             {
-//                 "title": "Lead Engineer / Staff Engineer",
-//                 "salary": 2800000,
-//                 "years": "7-10 Years",
-//                 "skills": ["Architecture", "Distributed Systems", "Mentoring", "Performance Optimization"]
-//             }
+//             { "title": "Intern", "salary": 150000, "years": "0-1 Years", "skills": ["HTML", "CSS", "JavaScript Basics", "Git", "DSA Basics"] },
+//             { "title": "Junior Developer / SDE I", "salary": 800000, "years": "1-3 Years", "skills": ["JavaScript", "React or Backend Framework", "APIs", "Databases", "DSA"] },
+//             { "title": "Senior Developer / SDE II", "salary": 1800000, "years": "4-7 Years", "skills": ["System Design", "Databases", "Scalability", "Cloud", "Testing", "Code Reviews"] },
+//             { "title": "Lead Engineer / Staff Engineer", "salary": 2800000, "years": "7-10 Years", "skills": ["Architecture", "Distributed Systems", "Mentoring", "Performance Optimization"] }
+//         ]
+//     },
+//     "Data Analyst": {
+//         "levels": [
+//             { "title": "Junior Data Analyst", "salary": 500000, "years": "0-2 Years", "skills": ["Excel", "SQL", "Python", "Data Visualization"] },
+//             { "title": "Data Analyst", "salary": 1000000, "years": "2-5 Years", "skills": ["Advanced SQL", "Statistics", "Power BI/Tableau"] },
+//             { "title": "Senior Data Analyst", "salary": 1800000, "years": "5-8 Years", "skills": ["Machine Learning Basics", "Business Analytics", "Strategy"] }
+//         ]
+//     },
+//     "Lawyer": {
+//         "levels": [
+//             { "title": "Junior Associate", "salary": 400000, "years": "0-2 Years", "skills": ["Legal Research", "Drafting", "Court Procedures", "Communication"] },
+//             { "title": "Associate Lawyer", "salary": 900000, "years": "2-5 Years", "skills": ["Litigation", "Client Handling", "Case Strategy", "Negotiation"] },
+//             { "title": "Senior Lawyer", "salary": 1800000, "years": "5-10 Years", "skills": ["Court Representation", "Complex Case Handling", "Legal Advisory", "Team Leadership"] },
+//             { "title": "Partner / Legal Head", "salary": 3000000, "years": "10+ Years", "skills": ["Firm Management", "High-Level Negotiation", "Business Law", "Strategic Decision Making"] }
 //         ]
 //     }
 // };
@@ -36,18 +31,50 @@
 //     const nextBtn = document.getElementById("nextBtn");
 //     const careerSelect = document.getElementById("careerSelect");
 
-//     nextBtn.addEventListener("click", function () {
+//     careerSelect.innerHTML = '<option value="">-- Select Career --</option>';
 
-//         if (!careerSelect.value) {
-//             alert("Please select a career");
-//             return;
+//     Object.keys(careers).forEach(career => {
+//         const option = document.createElement("option");
+//         option.value = career;
+//         option.textContent = career;
+//         careerSelect.appendChild(option);
+//     });
+
+//     if (document.getElementById("nextBtn")) {
+
+//         const nextBtn = document.getElementById("nextBtn");
+//         const careerSelect = document.getElementById("careerSelect");
+
+//         // Only populate if dropdown has no dynamic values
+//         if (careerSelect.options.length <= 1) {
+//             Object.keys(careers).forEach(career => {
+//                 const option = document.createElement("option");
+//                 option.value = career;
+//                 option.textContent = career;
+//                 careerSelect.appendChild(option);
+//             });
 //         }
 
-//         localStorage.setItem("selectedCareer", careerSelect.value);
-//         window.location.href = "career.html";
-//     });
-// }
+//         nextBtn.addEventListener("click", function () {
+//             if (!careerSelect.value) {
+//                 alert("Please select a career");
+//                 return;
+//             }
 
+//             localStorage.setItem("selectedCareer", careerSelect.value);
+
+//             if (careerSelect.value === "Software Engineer") {
+//                 window.location.href = "se_rm.html";
+//             }
+//             else if (careerSelect.value === "Data Analyst") {
+//                 window.location.href = "DA_roadmap.html";
+//             }
+//             else if (careerSelect.value === "Lawyer") {
+//                 window.location.href = "lawyer-roadmap.html";
+//             }
+//         });
+//     }
+// }
 
 // // ================== CAREER PAGE LOGIC ==================
 // if (document.getElementById("careerTitle")) {
@@ -61,170 +88,182 @@
 
 //     const title = document.getElementById("careerTitle");
 //     const detailsDiv = document.getElementById("careerDetails");
-//     const chartCanvas = document.getElementById("salaryChart");
 
 //     title.innerText = selectedCareer;
 
 //     const levels = careers[selectedCareer].levels;
 
-//     // ===== CHECK IF SPECIFIC LEVEL IS REQUESTED =====
-//     const params = new URLSearchParams(window.location.search);
-//     const levelParam = params.get("level");
+//     // ================== ROADMAP VIEW ==================
+//     const roadmapContainer = document.createElement("div");
+//     roadmapContainer.className = "roadmap-container";
 
-//     // ================== SALARY GRAPH ==================
-//     if (chartCanvas) {
-//         const labels = levels.map(level => level.title);
-//         const salaries = levels.map(level => level.salary);
+//     levels.forEach(level => {
 
-//         const ctx = chartCanvas.getContext("2d");
+//         const stage = document.createElement("div");
+//         stage.className = "roadmap-stage";
+//         stage.innerText = level.title;
 
-//         new Chart(ctx, {
-//             type: "line",
-//             data: {
-//                 labels: labels,
-//                 datasets: [{
-//                     label: "Salary Growth (₹)",
-//                     data: salaries,
-//                     borderColor: "#6a0dad",
-//                     backgroundColor: "rgba(106, 13, 173, 0.1)",
-//                     borderWidth: 2,
-//                     fill: true,
-//                     tension: 0.3
-//                 }]
-//             },
-//             options: {
-//                 responsive: true,
-//                 scales: {
-//                     y: {
-//                         beginAtZero: true
-//                     }
-//                 }
+//         stage.addEventListener("click", function () {
+//             renderLevelDetails(level);
+//         });
+
+//         roadmapContainer.appendChild(stage);
+//     });
+
+//     detailsDiv.appendChild(roadmapContainer);
+
+//     // Download Button
+//     const downloadBtn = document.createElement("button");
+//     downloadBtn.className = "download-btn";
+//     downloadBtn.innerText = "Download Roadmap";
+
+//     downloadBtn.addEventListener("click", function () {
+
+//         const { jsPDF } = window.jspdf;
+//         const doc = new jsPDF();
+
+//         doc.text(`${selectedCareer} Career Roadmap`, 10, 10);
+
+//         let y = 20;
+
+//         levels.forEach(level => {
+//             doc.text(level.title, 10, y);
+//             y += 8;
+//             doc.text(`Experience: ${level.years}`, 10, y);
+//             y += 8;
+//             doc.text(`Salary: ₹${(level.salary / 100000).toFixed(1)} LPA`, 10, y);
+//             y += 8;
+//             doc.text(`Skills: ${level.skills.join(", ")}`, 10, y);
+//             y += 12;
+//         });
+
+//         doc.save(`${selectedCareer}_Roadmap.pdf`);
+//     });
+
+//     detailsDiv.appendChild(downloadBtn);
+
+//     // ================== LEVEL DETAILS RENDER ==================
+//     function renderLevelDetails(level) {
+
+//         const existing = document.getElementById("levelDetailsSection");
+//         if (existing) existing.remove();
+
+//         const section = document.createElement("div");
+//         section.id = "levelDetailsSection";
+//         section.className = "level-card";
+
+//         section.innerHTML = `
+//             <h2>${level.title}</h2>
+//             <p><strong>Salary (Per Annum):</strong> ₹${(level.salary / 100000).toFixed(1)} LPA</p>
+//             <p><strong>Experience Required:</strong> ${level.years}</p>
+//             <p><strong>Required Skills:</strong> ${level.skills.join(", ")}</p>
+//             <hr>
+//             <h3>Skill Gap Analyzer</h3>
+//             <p>Enter your current skills (comma separated):</p>
+//             <input type="text" id="userSkillsInput" placeholder="e.g., HTML, CSS">
+//             <br><br>
+//             <button id="analyzeBtn">Analyze</button>
+//             <div id="analysisResult" style="margin-top:15px;"></div>
+//         `;
+
+//         detailsDiv.appendChild(section);
+
+//         const analyzeBtn = document.getElementById("analyzeBtn");
+//         const userSkillsInput = document.getElementById("userSkillsInput");
+
+//         analyzeBtn.addEventListener("click", handleAnalysis);
+//         userSkillsInput.addEventListener("keydown", function (event) {
+//             if (event.key === "Enter") {
+//                 event.preventDefault();
+//                 handleAnalysis();
 //             }
 //         });
-//     }
 
-//     // ================== IF SPECIFIC LEVEL PAGE ==================
-//     if (levelParam) {
+//         function handleAnalysis() {
 
-//         const level = levels.find(l => l.title === levelParam);
+//             const input = userSkillsInput.value;
 
-//         if (level) {
+//             if (!input) {
+//                 alert("Please enter your skills.");
+//                 return;
+//             }
 
-//             detailsDiv.innerHTML = `
-//                 <div class="level-card">
-//                     <h2>${level.title}</h2>
-//                     <p><strong>Salary:</strong> ₹${level.salary.toLocaleString()}</p>
-//                     <p><strong>Experience:</strong> ${level.years}</p>
-//                     <p><strong>Required Skills:</strong> ${level.skills.join(", ")}</p>
+//             const userSkills = input.split(",").map(skill => skill.trim().toLowerCase());
+//             const requiredSkills = level.skills.map(skill => skill.toLowerCase());
 
-//                     <hr>
+//             const missingSkills = requiredSkills.filter(skill =>
+//                 !userSkills.includes(skill)
+//             );
 
-//                     <h3>Skill Gap Analyzer</h3>
-//                     <p>Enter your current skills (comma separated):</p>
-//                     <input type="text" id="userSkillsInput" placeholder="e.g., HTML, CSS">
-//                     <br><br>
-//                     <button id="analyzeBtn">Analyze</button>
+//             const matchedSkills = requiredSkills.length - missingSkills.length;
+//             const readinessPercent = Math.round(
+//                 (matchedSkills / requiredSkills.length) * 100
+//             );
 
-//                     <div id="analysisResult" style="margin-top:15px;"></div>
-
-//                     <br><br>
-//                     <button onclick="window.location.href='career.html'">
-//                         ⬅ Back to Career Levels
-//                     </button>
-//                 </div>
-//             `;
-
-//             // ===== SKILL GAP LOGIC =====
-//             const analyzeBtn = document.getElementById("analyzeBtn");
-
-//             analyzeBtn.addEventListener("click", function () {
-
-//                 const input = document.getElementById("userSkillsInput").value;
-
-//                 if (!input) {
-//                     alert("Please enter your skills.");
-//                     return;
-//                 }
-
-//                 const userSkills = input
-//                     .split(",")
-//                     .map(skill => skill.trim().toLowerCase());
-
-//                 const requiredSkills = level.skills
-//                     .map(skill => skill.toLowerCase());
-
-//                 const missingSkills = requiredSkills.filter(skill =>
-//                     !userSkills.includes(skill)
-//                 );
-
-//                 const matchedSkills = requiredSkills.length - missingSkills.length;
-//                 const readinessPercent = Math.round(
-//                     (matchedSkills / requiredSkills.length) * 100
-//                 );
-
-//                 const resultDiv = document.getElementById("analysisResult");
-
-//                 resultDiv.innerHTML = `
-//                     <p><strong>Readiness Score:</strong> ${readinessPercent}%</p>
-//                     <p><strong>Missing Skills:</strong> ${missingSkills.length > 0
-//                         ? missingSkills.join(", ")
-//                         : "None 🎉 You are fully ready!"
-//                     }</p>
-//                 `;
-//             });
+//             renderAnalysis(readinessPercent, missingSkills);
 //         }
 
-//     } else {
+//         function renderAnalysis(readinessPercent, missingSkills) {
 
-//         // ================== NORMAL CAREER PAGE ==================
-//         levels.forEach(level => {
+//             const resultDiv = document.getElementById("analysisResult");
 
-//             const card = document.createElement("div");
-//             card.className = "level-card";
+//             let statusText = "";
+//             let statusClass = "";
 
-//             card.innerHTML = `
-//                 <h3>${level.title}</h3>
-//                 <p>Click to view full details</p>
+//             if (readinessPercent <= 40) {
+//                 statusText = "Beginner";
+//                 statusClass = "badge-beginner";
+//             }
+//             else if (readinessPercent <= 75) {
+//                 statusText = "Growing";
+//                 statusClass = "badge-growing";
+//             }
+//             else {
+//                 statusText = "Ready";
+//                 statusClass = "badge-ready";
+//             }
+
+//             resultDiv.innerHTML = `
+//                 <div class="animated-result">
+//                     <div class="status-badge ${statusClass}">
+//                         ${statusText} (${readinessPercent}%)
+//                     </div>
+//                     <div class="progress-bar-container">
+//                         <div class="progress-bar-fill" style="width: ${readinessPercent}%"></div>
+//                     </div>
+//                     <p style="margin-top:12px;"><strong>Missing Skills:</strong> 
+//                     ${missingSkills.length > 0
+//                     ? missingSkills.join(", ")
+//                     : "None 🎉 You are fully ready!"
+//                 }</p>
+//                 </div>
 //             `;
-
-//             card.addEventListener("click", function () {
-//                 const encodedLevel = encodeURIComponent(level.title);
-//                 window.location.href = `career.html?level=${encodedLevel}`;
-//             });
-
-//             detailsDiv.appendChild(card);
-//         });
+//         }
 //     }
 // }
-
 // ================== CAREER DATA ==================
 const careers = {
     "Software Engineer": {
         "levels": [
-            {
-                "title": "Intern",
-                "salary": 150000,
-                "years": "0-1 Years",
-                "skills": ["HTML", "CSS", "JavaScript Basics", "Git", "DSA Basics"]
-            },
-            {
-                "title": "Junior Developer / SDE I",
-                "salary": 800000,
-                "years": "1-3 Years",
-                "skills": ["JavaScript", "React or Backend Framework", "APIs", "Databases", "DSA"]
-            },
-            {
-                "title": "Senior Developer / SDE II",
-                "salary": 1800000,
-                "years": "4-7 Years",
-                "skills": ["System Design", "Databases", "Scalability", "Cloud", "Testing", "Code Reviews"]
-            },
-            {
-                "title": "Lead Engineer / Staff Engineer",
-                "salary": 2800000,
-                "years": "7-10 Years",
-                "skills": ["Architecture", "Distributed Systems", "Mentoring", "Performance Optimization"]
-            }
+            { "title": "Intern", "salary": 150000, "years": "0-1 Years", "skills": ["HTML", "CSS", "JavaScript Basics", "Git", "DSA Basics"] },
+            { "title": "Junior Developer / SDE I", "salary": 800000, "years": "1-3 Years", "skills": ["JavaScript", "React or Backend Framework", "APIs", "Databases", "DSA"] },
+            { "title": "Senior Developer / SDE II", "salary": 1800000, "years": "4-7 Years", "skills": ["System Design", "Databases", "Scalability", "Cloud", "Testing", "Code Reviews"] },
+            { "title": "Lead Engineer / Staff Engineer", "salary": 2800000, "years": "7-10 Years", "skills": ["Architecture", "Distributed Systems", "Mentoring", "Performance Optimization"] }
+        ]
+    },
+    "Data Analyst": {
+        "levels": [
+            { "title": "Junior Data Analyst", "salary": 500000, "years": "0-2 Years", "skills": ["Excel", "SQL", "Python", "Data Visualization"] },
+            { "title": "Data Analyst", "salary": 1000000, "years": "2-5 Years", "skills": ["Advanced SQL", "Statistics", "Power BI/Tableau"] },
+            { "title": "Senior Data Analyst", "salary": 1800000, "years": "5-8 Years", "skills": ["Machine Learning Basics", "Business Analytics", "Strategy"] }
+        ]
+    },
+    "Lawyer": {
+        "levels": [
+            { "title": "Junior Associate", "salary": 400000, "years": "0-2 Years", "skills": ["Legal Research", "Drafting", "Court Procedures", "Communication"] },
+            { "title": "Associate Lawyer", "salary": 900000, "years": "2-5 Years", "skills": ["Litigation", "Client Handling", "Case Strategy", "Negotiation"] },
+            { "title": "Senior Lawyer", "salary": 1800000, "years": "5-10 Years", "skills": ["Court Representation", "Complex Case Handling", "Legal Advisory", "Team Leadership"] },
+            { "title": "Partner / Legal Head", "salary": 3000000, "years": "10+ Years", "skills": ["Firm Management", "High-Level Negotiation", "Business Law", "Strategic Decision Making"] }
         ]
     }
 };
@@ -243,10 +282,11 @@ if (document.getElementById("nextBtn")) {
         }
 
         localStorage.setItem("selectedCareer", careerSelect.value);
+
+        // ✅ OLD WORKING SYSTEM
         window.location.href = "career.html";
     });
 }
-
 
 // ================== CAREER PAGE LOGIC ==================
 if (document.getElementById("careerTitle")) {
@@ -260,161 +300,180 @@ if (document.getElementById("careerTitle")) {
 
     const title = document.getElementById("careerTitle");
     const detailsDiv = document.getElementById("careerDetails");
-    const chartCanvas = document.getElementById("salaryChart");
 
     title.innerText = selectedCareer;
 
     const levels = careers[selectedCareer].levels;
 
-    // ===== CHECK IF SPECIFIC LEVEL IS REQUESTED =====
-    const params = new URLSearchParams(window.location.search);
-    const levelParam = params.get("level");
+    // ================== ROADMAP STAGES ==================
+    const roadmapContainer = document.createElement("div");
+    roadmapContainer.className = "roadmap-container";
 
-    // ================== SALARY GRAPH ==================
-    if (chartCanvas) {
-        const labels = levels.map(level => level.title);
-        const salaries = levels.map(level => level.salary);
+    levels.forEach(level => {
 
-        const ctx = chartCanvas.getContext("2d");
+        const stage = document.createElement("div");
+        stage.className = "roadmap-stage";
+        stage.innerText = level.title;
 
-        new Chart(ctx, {
-            type: "line",
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: "Salary Per Annum (₹)",
-                    data: salaries,
-                    borderColor: "#6a0dad",
-                    backgroundColor: "rgba(106, 13, 173, 0.1)",
-                    borderWidth: 2,
-                    fill: true,
-                    tension: 0.3
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
+        stage.addEventListener("click", function () {
+            renderLevelDetails(level);
+        });
+
+        roadmapContainer.appendChild(stage);
+    });
+
+    detailsDiv.appendChild(roadmapContainer);
+
+    // ================== GENERATE ROADMAP BUTTON ==================
+    // ================== GENERATE ROADMAP BUTTON ==================
+    const generateBtn = document.createElement("button");
+    generateBtn.className = "download-btn";
+    generateBtn.innerText = "Generate Roadmap";
+
+    generateBtn.addEventListener("click", function () {
+
+        if (selectedCareer === "Software Engineer") {
+            window.location.href = "se_rm.html";
+        }
+        else if (selectedCareer === "Data Analyst") {
+            window.location.href = "DA_roadmap.html";
+        }
+        else if (selectedCareer === "Lawyer") {
+            window.location.href = "lawyer-roadmap.html";
+        }
+    });
+
+    detailsDiv.appendChild(generateBtn);
+    // const generateBtn = document.createElement("button");
+    // generateBtn.className = "download-btn";
+    // generateBtn.innerText = "Generate Roadmap";
+
+    // generateBtn.addEventListener("click", function () {
+
+    //     const existing = document.getElementById("generatedRoadmap");
+    //     if (existing) {
+    //         existing.remove();
+    //         return;
+    //     }
+
+    //     const roadmapSection = document.createElement("div");
+    //     roadmapSection.id = "generatedRoadmap";
+    //     roadmapSection.className = "roadmap-visual";
+
+    //     roadmapSection.innerHTML = `
+    //         <h2 style="margin-top:40px;">Career Roadmap</h2>
+    //         <div class="roadmap-line"></div>
+    //         <div class="roadmap-flow">
+    //             ${levels.map(level => `
+    //                 <div class="roadmap-node">
+    //                     <h3>${level.title}</h3>
+    //                     <p>${level.skills.join(", ")}</p>
+    //                 </div>
+    //             `).join("")}
+    //         </div>
+    //     `;
+
+    //     detailsDiv.appendChild(roadmapSection);
+    // });
+
+    // detailsDiv.appendChild(generateBtn);
+
+    // ================== LEVEL DETAILS ==================
+    function renderLevelDetails(level) {
+
+        const existing = document.getElementById("levelDetailsSection");
+        if (existing) existing.remove();
+
+        const section = document.createElement("div");
+        section.id = "levelDetailsSection";
+        section.className = "level-card";
+
+        section.innerHTML = `
+            <h2>${level.title}</h2>
+            <p><strong>Salary (Per Annum):</strong> ₹${(level.salary / 100000).toFixed(1)} LPA</p>
+            <p><strong>Experience Required:</strong> ${level.years}</p>
+            <p><strong>Required Skills:</strong> ${level.skills.join(", ")}</p>
+            <hr>
+            <h3>Skill Gap Analyzer</h3>
+            <p>Enter your current skills (comma separated):</p>
+            <input type="text" id="userSkillsInput" placeholder="e.g., HTML, CSS">
+            <br><br>
+            <button id="analyzeBtn">Analyze</button>
+            <div id="analysisResult" style="margin-top:15px;"></div>
+        `;
+
+        detailsDiv.appendChild(section);
+
+        const analyzeBtn = document.getElementById("analyzeBtn");
+        const userSkillsInput = document.getElementById("userSkillsInput");
+
+        analyzeBtn.addEventListener("click", handleAnalysis);
+        userSkillsInput.addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                handleAnalysis();
             }
         });
-    }
 
-    // ================== IF SPECIFIC LEVEL PAGE ==================
-    if (levelParam) {
+        function handleAnalysis() {
 
-        const level = levels.find(l => l.title === levelParam);
+            const input = userSkillsInput.value;
 
-        if (level) {
+            if (!input) {
+                alert("Please enter your skills.");
+                return;
+            }
 
-            detailsDiv.innerHTML = `
-                <div class="level-card">
-                    <h2>${level.title}</h2>
-                    <p><strong>Salary (Per Annum):</strong> ₹${level.salary.toLocaleString()}</p>
-                    <p><strong>Experience Required:</strong> ${level.years}</p>
-                    <p><strong>Required Skills:</strong> ${level.skills.join(", ")}</p>
+            const userSkills = input.split(",").map(skill => skill.trim().toLowerCase());
+            const requiredSkills = level.skills.map(skill => skill.toLowerCase());
 
-                    <hr>
+            const missingSkills = requiredSkills.filter(skill =>
+                !userSkills.includes(skill)
+            );
 
-                    <h3>Skill Gap Analyzer</h3>
-                    <p>Enter your current skills (comma separated):</p>
-                    <input type="text" id="userSkillsInput" placeholder="e.g., HTML, CSS">
-                    <br><br>
-                    <button id="analyzeBtn">Analyze</button>
+            const matchedSkills = requiredSkills.length - missingSkills.length;
+            const readinessPercent = Math.round(
+                (matchedSkills / requiredSkills.length) * 100
+            );
 
-                    <div id="analysisResult" style="margin-top:15px;"></div>
-
-                    <br><br>
-                    <button onclick="window.location.href='career.html'">
-                        ⬅ Back to Career Levels
-                    </button>
-                </div>
-            `;
-
-            // ===== SKILL GAP LOGIC =====
-            const analyzeBtn = document.getElementById("analyzeBtn");
-
-            analyzeBtn.addEventListener("click", function () {
-
-                const input = document.getElementById("userSkillsInput").value;
-
-                if (!input) {
-                    alert("Please enter your skills.");
-                    return;
-                }
-
-                const userSkills = input
-                    .split(",")
-                    .map(skill => skill.trim().toLowerCase());
-
-                const requiredSkills = level.skills
-                    .map(skill => skill.toLowerCase());
-
-                const missingSkills = requiredSkills.filter(skill =>
-                    !userSkills.includes(skill)
-                );
-
-                const matchedSkills = requiredSkills.length - missingSkills.length;
-                const readinessPercent = Math.round(
-                    (matchedSkills / requiredSkills.length) * 100
-                );
-
-                const resultDiv = document.getElementById("analysisResult");
-
-                let statusText = "";
-                let statusClass = "";
-
-                if (readinessPercent <= 40) {
-                    statusText = "Beginner";
-                    statusClass = "badge-beginner";
-                }
-                else if (readinessPercent <= 75) {
-                    statusText = "Growing";
-                    statusClass = "badge-growing";
-                }
-                else {
-                    statusText = "Ready";
-                    statusClass = "badge-ready";
-                }
-
-                resultDiv.innerHTML = `
-    <div class="status-badge ${statusClass}">
-        ${statusText} (${readinessPercent}%)
-    </div>
-
-    <div class="progress-bar-container">
-        <div class="progress-bar-fill" style="width: ${readinessPercent}%"></div>
-    </div>
-
-    <p style="margin-top:10px;"><strong>Missing Skills:</strong> ${missingSkills.length > 0
-                        ? missingSkills.join(", ")
-                        : "None 🎉 You are fully ready!"
-                    }</p>
-`;
-            });
+            renderAnalysis(readinessPercent, missingSkills);
         }
 
-    } else {
+        function renderAnalysis(readinessPercent, missingSkills) {
 
-        // ================== NORMAL CAREER PAGE ==================
-        levels.forEach(level => {
+            const resultDiv = document.getElementById("analysisResult");
 
-            const card = document.createElement("div");
-            card.className = "level-card level-list-card";
+            let statusText = "";
+            let statusClass = "";
 
-            card.innerHTML = `
-                <h3>${level.title}</h3>
-                <p>Click to view full details</p>
+            if (readinessPercent <= 40) {
+                statusText = "Beginner";
+                statusClass = "badge-beginner";
+            }
+            else if (readinessPercent <= 75) {
+                statusText = "Growing";
+                statusClass = "badge-growing";
+            }
+            else {
+                statusText = "Ready";
+                statusClass = "badge-ready";
+            }
+
+            resultDiv.innerHTML = `
+                <div class="animated-result">
+                    <div class="status-badge ${statusClass}">
+                        ${statusText} (${readinessPercent}%)
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-fill" style="width: ${readinessPercent}%"></div>
+                    </div>
+                    <p style="margin-top:12px;"><strong>Missing Skills:</strong> 
+                    ${missingSkills.length > 0
+                    ? missingSkills.join(", ")
+                    : "None 🎉 You are fully ready!"
+                }</p>
+                </div>
             `;
-
-            card.addEventListener("click", function () {
-                const encodedLevel = encodeURIComponent(level.title);
-                window.location.href = `career.html?level=${encodedLevel}`;
-            });
-
-            detailsDiv.appendChild(card);
-        });
+        }
     }
 }

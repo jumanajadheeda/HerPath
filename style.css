@@ -1,44 +1,166 @@
-/*Add Readiness Badge
-B) Format Salary to LPA
-C) Add New Career Path
-D) Make UI look premium*/
-
+/* ===== PREMIUM BACKGROUND ===== */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    padding: 30px;
+    font-family: 'Poppins', Arial, sans-serif;
+
+    background: linear-gradient(135deg, #f8a5c2, #c084fc, #74b9ff);
+    background-size: 400% 400%;
+    animation: gradientMove 15s ease infinite;
+
+    padding: 40px;
     margin: 0;
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    overflow: hidden;
+    position: relative;
 }
 
-h1 {
-    color: #6a0dad;
+/* Sparkle overlay */
+body::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(white 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.18;
+    z-index: 0;
 }
 
+/* Animated gradient */
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Ensure content above sparkle */
+h1,
+h2,
 select,
 button {
-    padding: 10px;
-    font-size: 16px;
-    margin-top: 10px;
+    position: relative;
+    z-index: 2;
 }
 
+/* ===== HEADINGS ===== */
+h1 {
+    color: #7c3aed;
+    font-size: 75px;
+    font-weight: 800;
+    margin-bottom: 10px;
+
+    text-shadow:
+        0 3px 0 #6d28d9,
+        0 6px 0 #5b21b6,
+        0 14px 35px rgba(0, 0, 0, 0.25);
+
+    animation: floatTitle 4s ease-in-out infinite;
+}
+
+/* Floating animation */
+@keyframes floatTitle {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-12px);
+    }
+}
+
+h2 {
+    margin-bottom: 30px;
+    font-weight: 500;
+    font-size: 22px;
+    color: #4b5563;
+}
+
+/* ===== FORM ELEMENTS ===== */
+select,
 button {
-    background-color: #6a0dad;
+    padding: 16px 28px;
+    font-size: 18px;
+    margin-top: 10px;
+    border-radius: 20px;
+}
+
+/* Premium select */
+select {
+    border: none;
+    background: white;
+    min-width: 300px;
+
+    box-shadow:
+        0 8px 0 #d1d5db,
+        0 18px 35px rgba(0, 0, 0, 0.25);
+
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+select:hover {
+    transform: translateY(-4px);
+}
+
+select:active {
+    transform: translateY(8px);
+    box-shadow:
+        0 4px 0 #d1d5db,
+        0 10px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* Premium button */
+button {
+    background: linear-gradient(90deg, #7c3aed, #6d28d9);
     color: white;
     border: none;
-    border-radius: 6px;
     cursor: pointer;
+
+    box-shadow:
+        0 8px 0 #4c1d95,
+        0 18px 40px rgba(124, 58, 237, 0.5);
+
+    transition: 0.3s ease;
+    margin-left: 18px;
 }
 
 button:hover {
-    background-color: #5400a8;
+    transform: translateY(-5px);
+    box-shadow:
+        0 12px 45px rgba(124, 58, 237, 0.6);
 }
 
+button:active {
+    transform: translateY(8px);
+    box-shadow:
+        0 4px 0 #4c1d95,
+        0 10px 25px rgba(124, 58, 237, 0.5);
+}
+
+/* ===== LEVEL CARD ===== */
 .level-card {
     background: white;
-    padding: 15px;
-    margin-top: 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(123, 47, 247, 0.15);
+    transition: 0.3s ease;
 }
 
 /* ===== Readiness Badge ===== */
@@ -50,21 +172,19 @@ button:hover {
     margin-bottom: 10px;
     text-align: center;
     transition: 0.3s ease;
+    animation: popIn 0.4s ease;
 }
 
-/* Beginner - Red */
 .badge-beginner {
-    background-color: #e74c3c;
+    background: linear-gradient(90deg, #e74c3c, #ff7675);
 }
 
-/* Growing - Orange */
 .badge-growing {
-    background-color: #f39c12;
+    background: linear-gradient(90deg, #f39c12, #f1c40f);
 }
 
-/* Ready - Green */
 .badge-ready {
-    background-color: #27ae60;
+    background: linear-gradient(90deg, #27ae60, #2ecc71);
 }
 
 /* ===== Progress Bar ===== */
@@ -79,19 +199,18 @@ button:hover {
 
 .progress-bar-fill {
     height: 100%;
-    background-color: #6a0dad;
-    transition: width 0.5s ease-in-out;
+    background: linear-gradient(90deg, #6a0dad, #9b59b6);
+    transition: width 0.8s ease-in-out;
 }
 
-
-
+/* ===== Level List Card Hover ===== */
 .level-list-card {
     transition: all 0.3s ease;
     cursor: pointer;
 }
 
 .level-list-card:hover {
-    background-color: #6a0dad;
+    background: linear-gradient(90deg, #6a0dad, #9b59b6);
     color: white;
     transform: translateY(-4px);
 }
@@ -99,4 +218,186 @@ button:hover {
 .level-list-card:hover h3,
 .level-list-card:hover p {
     color: white;
+}
+
+/* ===== Fade In Animation ===== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animated-result {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+/* ===== Badge Pop Animation ===== */
+@keyframes popIn {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* ===== ROADMAP SECTION ===== */
+.roadmap-container {
+    position: relative;
+    margin: 50px 0;
+    padding-left: 60px;
+}
+
+.roadmap-line {
+    position: absolute;
+    left: 25px;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(to bottom, #7b2ff7, #b388ff);
+}
+
+.roadmap-stage {
+    background: white;
+    border: 2px solid #7b2ff7;
+    padding: 15px 20px;
+    margin-bottom: 40px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    font-weight: 600;
+    box-shadow: 0 5px 15px rgba(123, 47, 247, 0.1);
+}
+
+.roadmap-stage:hover {
+    background: #f3e8ff;
+    transform: translateX(10px);
+}
+
+/* ===== Stage Details Card ===== */
+.stage-details {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 20px;
+    box-shadow: 0 10px 25px rgba(123, 47, 247, 0.2);
+}
+
+/* ===== Generate / Download Button ===== */
+.download-btn {
+    margin-top: 20px;
+    padding: 12px 25px;
+    background: linear-gradient(90deg, #7b2ff7, #b388ff);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.download-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(123, 47, 247, 0.4);
+}
+
+/* ===== DREAMY INTERACTIVE BACKGROUND BLOBS ===== */
+
+body::after {
+    content: "";
+    position: absolute;
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle at center,
+            rgba(255, 255, 255, 0.35),
+            rgba(255, 255, 255, 0.15),
+            transparent 70%);
+    top: -200px;
+    left: -200px;
+    filter: blur(80px);
+    animation: floatBlob 20s ease-in-out infinite alternate;
+    z-index: 1;
+    pointer-events: none;
+}
+
+@keyframes floatBlob {
+    0% {
+        transform: translate(0px, 0px) scale(1);
+    }
+
+    50% {
+        transform: translate(300px, 200px) scale(1.2);
+    }
+
+    100% {
+        transform: translate(600px, 100px) scale(1);
+    }
+}
+
+/* Second soft glow layer */
+body::before {
+    content: "";
+    position: absolute;
+    width: 900px;
+    height: 900px;
+    background: radial-gradient(circle at center,
+            rgba(255, 255, 255, 0.25),
+            transparent 70%);
+    bottom: -300px;
+    right: -300px;
+    filter: blur(100px);
+    animation: floatBlobReverse 25s ease-in-out infinite alternate;
+    z-index: 1;
+    pointer-events: none;
+}
+
+@keyframes floatBlobReverse {
+    0% {
+        transform: translate(0px, 0px) scale(1);
+    }
+
+    50% {
+        transform: translate(-250px, -150px) scale(1.3);
+    }
+
+    100% {
+        transform: translate(-500px, -50px) scale(1);
+    }
+}
+
+/* ===== CENTER SELECT + BUTTON PERFECTLY ===== */
+
+#careerSelect,
+#nextBtn {
+    position: relative;
+    z-index: 2;
+}
+
+/* Wrap them visually in center */
+#careerSelect {
+    display: inline-block;
+}
+
+#nextBtn {
+    display: inline-block;
+}
+
+/* Make them appear centered together */
+body {
+    align-items: center;
+    justify-content: center;
+}
+
+/* Ensure horizontal alignment */
+#careerSelect,
+#nextBtn {
+    vertical-align: middle;
 }
