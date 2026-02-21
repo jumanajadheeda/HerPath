@@ -242,6 +242,7 @@
 //     }
 // }
 // ================== CAREER DATA ==================
+
 const careers = {
     "Software Engineer": {
         "levels": [
@@ -267,7 +268,17 @@ const careers = {
         ]
     }
 };
+function goToRoadmap() {
+    const career = document.getElementById("careerSelect").value;
 
+    if (!career) {
+        alert("Please select a career");
+        return;
+    }
+
+    localStorage.setItem("selectedCareer", career);
+    window.location.href = "roadmap.html";
+}
 // ================== INDEX PAGE LOGIC ==================
 if (document.getElementById("nextBtn")) {
 
@@ -287,7 +298,27 @@ if (document.getElementById("nextBtn")) {
         window.location.href = "career.html";
     });
 }
+async function generateRoadmap() {
+    const career = document.getElementById("careerInput").value;
 
+    try {
+        const response = await fetch("http://localhost:5000/generate-roadmap", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ career })
+        });
+
+        const data = await response.json();
+
+        console.log(data); // for debugging
+        renderRoadmap(data);
+
+    } catch (error) {
+        console.error("Error fetching roadmap:", error);
+    }
+}
 // ================== CAREER PAGE LOGIC ==================
 if (document.getElementById("careerTitle")) {
 
@@ -330,17 +361,62 @@ if (document.getElementById("careerTitle")) {
     generateBtn.className = "download-btn";
     generateBtn.innerText = "Generate Roadmap";
 
-    generateBtn.addEventListener("click", function () {
+    generateBtn.addEventListener("click", async function () {
 
-        if (selectedCareer === "Software Engineer") {
-            window.location.href = "se_rm.html";
+        generateBtn.innerText = "Generating...";
+        generateBtn.disabled = true;
+
+        try {
+
+            const response = await fetch("http://localhost:5000/generate-roadmap", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ career: selectedCareer })
+            });
+
+            const data = await response.json();
+
+            // Remove old roadmap if exists
+            const old = document.getElementById("aiRoadmap");
+            if (old) old.remove();
+
+            const roadmapContainer = document.createElement("div");
+            roadmapContainer.id = "aiRoadmap";
+            roadmapContainer.className = "roadmap-container";
+
+            data.levels.forEach(level => {
+
+                const stage = document.createElement("div");
+                stage.className = "roadmap-stage";
+
+                stage.innerHTML = `
+                <h3>${level.title}</h3>
+                <p><strong>Salary:</strong> ${level.salary_lpa} LPA</p>
+                <p><strong>Experience:</strong> ${level.years}</p>
+                <p><strong>Skills:</strong> ${level.skills.join(", ")}</p>
+            `;
+
+                roadmapContainer.appendChild(stage);
+            });
+
+            const wikiLink = document.createElement("a");
+            wikiLink.href = data.wikipedia;
+            wikiLink.target = "_blank";
+            wikiLink.innerText = "Learn more on Wikipedia";
+            wikiLink.style.display = "block";
+            wikiLink.style.marginTop = "20px";
+
+            detailsDiv.appendChild(roadmapContainer);
+            detailsDiv.appendChild(wikiLink);
+
+        } catch (error) {
+            alert("AI generation failed");
         }
-        else if (selectedCareer === "Data Analyst") {
-            window.location.href = "DA_roadmap.html";
-        }
-        else if (selectedCareer === "Lawyer") {
-            window.location.href = "lawyer-roadmap.html";
-        }
+
+        generateBtn.innerText = "Generate Roadmap";
+        generateBtn.disabled = false;
     });
 
     detailsDiv.appendChild(generateBtn);

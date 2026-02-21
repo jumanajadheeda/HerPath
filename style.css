@@ -16,7 +16,8 @@ body {
     align-items: center;
     text-align: center;
 
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
     position: relative;
 }
 
@@ -387,7 +388,7 @@ body::before {
 }
 
 #nextBtn {
-    display: inline-block;
+    display: inline-block
 }
 
 /* Make them appear centered together */
