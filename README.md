@@ -48,6 +48,12 @@ HerPath solves this by:
 - Supporting multiple careers dynamically
 
 ---
+<img width="1904" height="861" alt="image" src="https://github.com/user-attachments/assets/baad8fd3-4414-46b2-b17e-4989d0dceb07" />
+
+<img width="1901" height="868" alt="image" src="https://github.com/user-attachments/assets/6ae97c4d-cfba-46e7-8250-fb7a8e342839" />
+
+
+<img width="1900" height="870" alt="image" src="https://github.com/user-attachments/assets/3023d6dc-9dd0-4aa0-a9ff-9d92eecc938f" />
 
 # 🛠 Technical Details
 
