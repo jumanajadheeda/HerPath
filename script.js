@@ -58,12 +58,10 @@ if (document.getElementById("careerTitle")) {
     const detailsDiv = document.getElementById("careerDetails");
     const isFileProtocol = window.location.protocol === "file:";
     const isGitHubPages = window.location.hostname.endsWith("github.io");
-    const metaApiBaseUrl = document.querySelector('meta[name="herpath-api-base-url"]')?.content?.trim();
-    const configuredApiBaseUrl = (window.HERPATH_API_BASE_URL || metaApiBaseUrl || localStorage.getItem("herpathApiBaseUrl") || "").trim();
 
     function normalizeApiBaseUrl(baseUrl) {
         const cleanBaseUrl = (baseUrl || "").replace(/\/$/, "");
-
+        return cleanBaseUrl;
     }
 
     const defaultApiBaseUrl =
