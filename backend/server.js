@@ -8,7 +8,9 @@ const app = express();
 // Middleware
 app.use(cors());
 app.use(express.json());
-
+app.get("/", (req, res) => {
+  res.send("HerPath Backend is Live 🚀");
+});
 // Routes
 app.use("/", roadmapRoutes);
 
